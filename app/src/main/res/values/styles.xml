@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CalendarViewTheme" parent="Theme.AppCompat">
+        <item name="android:background">@color/green_mc2</item>
+        <item name="android:dateTextAppearance">@style/CustomCalendarDateTextAppearance</item>
+    </style>
+
+    <style name="CustomCalendarDateTextAppearance" parent="android:TextAppearance">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Define circleImageStyle here -->
+    <style name="circleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

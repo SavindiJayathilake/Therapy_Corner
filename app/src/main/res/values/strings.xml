@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="app_name">FinalProject</string>
+
+        <string-array name="register_as_array">
+            <item>Therapist</item>
+            <item>Patient</item>
+        </string-array>
+
+    <string name="select_area">Select Area</string>
+    <string name="select_title">Select Title</string>
+    <string name="select_years_of_experience">Select Years of Experience</string>
+    <string name="select_areas_of_expertise">Select Area of Expertise</string>
+    <string name="select_therapy_services">Select Therapy Service</string>
+    <string name="select_offered_languages">Select Offered Language</string>
+    <string name="offered_age_group">Select Age Group</string>
+    <string name="select_services_platforms">Select Platform</string>
+    <string name="select_communication_mediums">Select Medium</string>
+    <string name="select_available_days">Select Availability</string>
+
+    <string-array name="moods">
+        <item> 😊  Happy</item>
+        <item> 😢  Sad</item>
+        <item> 😡  Angry</item>
+        <item> 😄  Excited</item>
+        <item> 😌  Relaxed</item>
+        <item> 😕  Confused</item>
+        <item> 😲  Surprised</item>
+        <item> 😩  Stressed</item>
+        <item> 😍  In Love</item>
+        <item> 😴  Tired</item>
+    </string-array>
+
+
+
+</resources>

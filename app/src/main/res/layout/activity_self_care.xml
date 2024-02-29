@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+        xmlns:android= "http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".SelfCareActivity"
+        android:background="@drawable/tyo">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/green_mc3"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:title="Self-Care" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/constraintLayout"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/quoteTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:text="I'm doing this for me."
+            android:textColor="@color/green_mc1"
+            android:textSize="25sp"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="229dp"
+            android:id="@+id/row1"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/quoteTextView">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/eJournalButtoncard"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/eJournalButtonName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/eJournalButton"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:text="Gratitude Journal"
+                        android:textColor="@color/green_mc3"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/eJournalButton"
+                        android:layout_width="90dp"
+                        android:layout_height="106dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/note_green" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/moodTrackerButtonName"
+                        android:text="Mood Tracker"
+                        android:textSize="14sp"
+                        android:textColor="@color/green_mc3"
+                        android:layout_marginTop="16dp"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/moodTrackerButton"/>
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="106dp"
+                        android:id="@+id/moodTrackerButton"
+                        android:src="@drawable/mood_green"
+                        android:layout_marginTop="15dp"
+                        android:layout_centerHorizontal="true"/>
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="229dp"
+            android:id="@+id/row2"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/row1">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pillTrackerButtonName"
+                        android:text="Relaxing Sounds"
+                        android:textSize="14sp"
+                        android:textColor="@color/green_mc3"
+                        android:layout_marginTop="16dp"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/relaxingSoundsButton"/>
+
+                    <ImageView
+                        android:id="@+id/relaxingSoundsButton"
+                        android:layout_width="90dp"
+                        android:layout_height="106dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/sounds_green"
+                        android:layout_centerHorizontal="true"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articlesButtonName"
+                        android:text="Self-Affirmations"
+                        android:textSize="14sp"
+                        android:textColor="@color/green_mc3"
+                        android:layout_marginTop="16dp"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/articlesButton"/>
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="106dp"
+                        android:id="@+id/articlesButton"
+                        android:src="@drawable/self_aff"
+                        android:layout_marginTop="15dp"
+                        android:layout_centerHorizontal="true"/>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/userprof"
+        android:label="TherapyCorner"
+        tools:replace="android:label"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FinalProject"
+        tools:targetApi="31" >
+
+
+        <activity android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--        <activity android:name=".LoginActivity" />-->
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".TherapistHomeActivity" />
+        <activity android:name=".PatientsChatLandingPage" />
+        <activity android:name=".TherapistProfileActivity" />
+        <activity android:name=".PatientHomepageActivity" />
+        <activity android:name=".SearchTherapist" />
+        <activity android:name=".SelfCareActivity" />
+        <activity android:name=".UserPatientProfileActivity" />
+        <activity android:name=".TherapistChatLandingPage" />
+        <activity android:name=".EJournalActivity"/>
+        <activity android:name=".MoodTrackerActivity" />
+        <activity android:name=".RelaxingSounds" />
+        <activity android:name=".DailyBoostActivity" />
+        <activity android:name=".AddNoteActivity" />
+        <activity android:name=".MatchTherapist" />
+        <activity android:name=".ReadonlyProfileActivity" />
+        <activity android:name=".BookingTherapistActivity" />
+        <activity android:name=".TherapistBookingApproval" />
+        <activity android:name=".ApprovedFragment" />
+        <activity android:name=".RejectedFragment" />
+        <activity android:name=".PendingFragment" />
+        <activity android:name=".AddTherapistToChat" />
+        <activity android:name=".TheraChatActivity" />
+        <activity android:name=".TheraChatActivityfromAdapterView" />
+        <activity android:name=".PatientChatActivity" />
+
+
+
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
+    </application>
+
+</manifest>

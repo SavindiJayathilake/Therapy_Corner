@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="area_array">
+        <item> </item>
+        <item>Ampara</item>
+        <item>Anuradhapura</item>
+        <item>Badulla</item>
+        <item>Batticaloa</item>
+        <item>Colombo</item>
+        <item>Galle</item>
+        <item>Gampaha</item>
+        <item>Hambantota</item>
+        <item>Kalutara</item>
+        <item>Kandy</item>
+        <item>Kegalla</item>
+        <item>Kilinochchi</item>
+        <item>Kurunegala</item>
+        <item>Mannar</item>
+        <item>Matale</item>
+        <item>Matara</item>
+        <item>Moneragala</item>
+        <item>Mullaitivu</item>
+        <item>Nuwara Eliya</item>
+        <item>Polonnaruwa</item>
+        <item>Puttalam</item>
+        <item>Ratnapura</item>
+        <item>Trincomalee</item>
+        <item>Vavuniya</item>
+
+    </array>
+
+
+    <array name="gender_array">
+        <item> </item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+
+    </array>
+
+
+    <array name="years_of_experience_array">
+        <item> </item>
+        <item>Less than 5 years</item>
+        <item>5 - 10 years</item>
+        <item>10 - 25 years</item>
+        <item>Over 25 years</item>
+
+
+    </array>
+
+    <array name="therapy_services_array">
+        <item> </item>
+        <item>Art Therapy</item>
+        <item>Individual Counselling</item>
+        <item>Couples Therapy</item>
+        <item>Family Therapy</item>
+        <item>Group Therapy</item>
+        <item>Grief Counselling</item>
+        <item>Marriage Counseling</item>
+        <item>Psychotherapy</item>
+        <item>Solution-Focused Therapy</item>
+
+    </array>
+
+    <array name="offered_languages_array">
+        <item> </item>
+        <item>English</item>
+        <item>Sinhala</item>
+        <item>English / Sinhala </item>
+
+    </array>
+
+    <array name="offered_age_group_array">
+        <item> </item>
+        <item>Teens</item>
+        <item>Adults</item>
+        <item>Working Adults</item>
+        <item>Senior Citizens</item>
+
+    </array>
+
+    <array name="services_platforms_array">
+        <item> </item>
+        <item>Online</item>
+        <item>Offline</item>
+        <item>Online / Offline </item>
+
+    </array>
+
+    <array name="communication_mediums_array">
+        <item> </item>
+        <item>Chatting</item>
+        <item>Video/Phone Calls</item>
+        <item>Online mediums ( Chatting / Calls )</item>
+        <item>Offline Face-to-Face Sessions</item>
+
+    </array>
+
+    <array name="available_days_array">
+        <item> </item>
+        <item>Weekdays Mornings Only</item>
+        <item>Weekdays Afternoons Only</item>
+        <item>Weekdays (Working hours)</item>
+        <item>Weekends Mornings Only</item>
+        <item>Weekends Afternoons Only</item>
+        <item>Weekends (Working hours)</item>
+
+    </array>
+
+
+
+</resources>
+
+    <!--    <array name="areas_of_expertise_array">-->
+
+    <!--        <item> </item>-->
+    <!--        <item>Abuse (Physical, Emotional, Sexual, Verbal)</item>-->
+    <!--        <item>Addiction</item>-->
+    <!--        <item>Anger Management</item>-->
+    <!--        <item>Anxiety</item>-->
+    <!--        <item>Depression</item>-->
+    <!--        <item>Eating Disorders</item>-->
+    <!--        <item>Family Counseling</item>-->
+    <!--        <item>Marriage Counseling</item>-->
+    <!--        <item>Stress Management</item>-->
+    <!--        <item>Suicide Intervention</item>-->
+    <!--        <item>Teen Issues</item>-->
+    <!--        <item>Trauma Recovery</item>-->
+
+    <!--    </array>-->

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/tyo"
+    tools:context=".TherapistProfileActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolynbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/green_mc3"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:title="User Profile" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="348dp"
+        android:layout_height="164dp"
+        android:layout_gravity="center"
+        android:paddingLeft="95dp"
+        app:shapeAppearanceOverlay="@style/circleImageStyle" >
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="155dp"
+            android:layout_height="155dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_background"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile_image"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile Information"
+        android:textColor="@color/green_mc3"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Basic Information"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+
+
+    <EditText
+        android:id="@+id/et_first_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/prof_border"
+        android:paddingLeft="15dp"
+        android:hint="First Name"
+        android:textSize="16sp"
+        android:inputType="textPersonName" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="12dp" />
+
+    <EditText
+        android:id="@+id/et_last_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/prof_border"
+        android:paddingLeft="15dp"
+        android:hint="Last Name"
+        android:textSize="16sp"
+        android:inputType="textPersonName"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="153dp"
+            android:layout_height="30dp"
+            android:paddingLeft="15dp"
+            android:layout_marginTop="4dp"
+            android:text="Gender"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/dropdown_border"
+
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_gender"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:entries="@array/gender_array"
+                android:prompt="@layout/custom_spinner_item" />
+
+        </LinearLayout>
+
+</LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/prof_border"
+        android:paddingLeft="15dp"
+        android:hint="Email"
+        android:textSize="16sp"
+        android:inputType="textEmailAddress"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/et_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/prof_border"
+        android:paddingLeft="15dp"
+        android:hint="Phone Number"
+        android:textSize="16sp"
+        android:inputType="phone"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+
+    <EditText
+        android:id="@+id/et_office_address"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/prof_border"
+        android:paddingLeft="15dp"
+        android:hint="Office Address"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:imeOptions="actionNext"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="153dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:text="Area"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/dropdown_border">
+
+                <Spinner
+                    android:id="@+id/spinner_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/area_array"
+                    android:prompt="@layout/custom_spinner_item" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Services Offered and Preferences"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Therapy Services Offered"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/dropdown_border">
+
+
+            <Spinner
+                android:id="@+id/spinner_therapy_services"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:entries="@array/therapy_services_array"
+                android:prompt="@layout/custom_spinner_item" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Offered Languages"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/dropdown_border">
+
+
+    <Spinner
+        android:id="@+id/spinner_offered_languages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:entries="@array/offered_languages_array"
+        android:prompt="@layout/custom_spinner_item" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Services Offered Platforms"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/dropdown_border">
+
+
+    <Spinner
+        android:id="@+id/spinner_services_platforms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:entries="@array/services_platforms_array"
+        android:prompt="@layout/custom_spinner_item"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly Payment Amount"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/et_month_pay"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/prof_border"
+            android:paddingLeft="15dp"
+            android:textSize="16sp"
+            android:inputType="numberDecimal"
+            android:hint="Session Fee (LKR)"/>
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Available Communication Mediums"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_marginTop="16dp" />-->
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="37dp"-->
+<!--        android:background="@drawable/dropdown_border">-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_communication_mediums"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:entries="@array/communication_mediums_array"-->
+<!--        android:prompt="@layout/custom_spinner_item" />-->
+
+    </LinearLayout>
+
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_button_small"
+        android:backgroundTint="@color/green_mc2"
+        android:text="Save"
+        android:textSize="18sp"  />
+
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_button_small"
+        android:backgroundTint="@color/red_mc1"
+        android:text="Cancel"
+        android:textSize="18sp"  />
+
+    </LinearLayout>
+
+</ScrollView>
