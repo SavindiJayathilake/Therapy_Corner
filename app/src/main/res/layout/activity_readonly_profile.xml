@@ -78,58 +78,57 @@
                 android:layout_height="10dp" />
 
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginBottom="20dp">-->
 
-                <TextView
-                    android:id="@+id/payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="a"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/payment"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="a"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp" />-->
 
 
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_marginBottom="20dp">
 
-                <Button
-                    android:id="@+id/selecttochat"
-                    android:layout_width="95dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="53dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/button_style_three"
-                    android:drawableLeft="@drawable/baseline_chat_bubble_24"
-                    android:padding="8dp"
-                    android:text="chat" />
+<!--                <Button-->
+<!--                    android:id="@+id/selecttochat"-->
+<!--                    android:layout_width="95dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginStart="53dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@drawable/button_style_three"-->
+<!--                    android:drawableLeft="@drawable/baseline_chat_bubble_24"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:text="chat" />-->
 
                 <Button
                     android:id="@+id/selecttobook"
-                    android:layout_width="95dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="70dp"
                     android:background="@drawable/button_style_three"
                     android:drawableLeft="@drawable/baseline_calendar_month_24"
                     android:padding="8dp"
-                    android:text="book" />
+                    android:text="book"
+                    android:layout_centerHorizontal="true"/>
 
             </RelativeLayout>
 

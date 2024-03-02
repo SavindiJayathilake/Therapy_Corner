@@ -55,6 +55,7 @@
         <activity android:name=".TheraChatActivity" />
         <activity android:name=".TheraChatActivityfromAdapterView" />
         <activity android:name=".PatientChatActivity" />
+        <activity android:name=".PatientAppointments" />
 
 
 

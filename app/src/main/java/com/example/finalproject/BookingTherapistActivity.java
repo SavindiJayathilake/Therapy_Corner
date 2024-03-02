@@ -40,7 +40,7 @@ import java.util.ArrayList;
 public class BookingTherapistActivity extends AppCompatActivity {
 
     private TextView doctorNameTextView;
-    private TextView payAmountTextView;
+
     private TextView therapyServiceTextView;
     private Button datePickerButton;
     private Spinner timeSlotsSpinner;
@@ -74,7 +74,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
 
         doctorNameTextView = findViewById(R.id.doctorNameTextView);
         therapyServiceTextView = findViewById(R.id.doctorServiceTextView);
-        payAmountTextView = findViewById(R.id.payAmountTextView);
+//        payAmountTextView = findViewById(R.id.payAmountTextView);
         datePickerButton = findViewById(R.id.datePickerButton);
         timeSlotsSpinner = findViewById(R.id.timeSlotsSpinner);
         bookButton = findViewById(R.id.bookButton);
@@ -112,14 +112,14 @@ public class BookingTherapistActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String therapistName = intent.getStringExtra("therapistName");
         String therapyService = intent.getStringExtra("therapyService");
-        String formattedPayment = intent.getStringExtra("formattedPayment");
+
 
 
 
         if (therapistName != null) {
             doctorNameTextView.setText(therapistName);
             therapyServiceTextView.setText(therapyService);
-            payAmountTextView.setText(formattedPayment);
+
         }
 
         setupDatePickerButton();
@@ -161,6 +161,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
                                         .whereEqualTo("therapist_username", therapistUsername)
                                         .whereEqualTo("date", selectedDateStr)
                                         .whereEqualTo("time_slot", selectedTimeSlot.toString())
+                                        .whereIn("approved_status", Arrays.asList("approved", "pending"))
                                         .get()
                                         .addOnSuccessListener(queryDocumentSnapshots -> {
                                             if (queryDocumentSnapshots.isEmpty()) {
@@ -176,6 +177,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
                                                 bookingData.put("patient_first_name", patientFirstName);
                                                 bookingData.put("patient_last_name", patientLastName);
                                                 bookingData.put("patient_email", patientEmail);
+                                                bookingData.put("therapist_name", therapistName);
 
                                                 bookingsCollection.document(bookingId)
                                                         .set(bookingData, SetOptions.merge())

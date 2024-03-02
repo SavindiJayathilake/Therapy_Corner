@@ -349,7 +349,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monthly Payment Amount"
+            android:text="Package Price Amount"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -371,7 +371,7 @@
             android:paddingLeft="15dp"
             android:textSize="16sp"
             android:inputType="numberDecimal"
-            android:hint="Session Fee (LKR)"/>
+            android:hint="Package Price (LKR)"/>
 
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->

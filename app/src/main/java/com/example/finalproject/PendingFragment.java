@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,8 +23,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -90,6 +96,41 @@ public class PendingFragment extends Fragment implements PendingAdapter.OnButton
 
     @Override
     public void onRejectButtonClick(Appointment appointment) {
+
+        Calendar currentDate = Calendar.getInstance();
+
+
+        Calendar appointmentDate = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            appointmentDate.setTime(sdf.parse(appointment.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        currentDate.set(Calendar.HOUR_OF_DAY, 0);
+        currentDate.set(Calendar.MINUTE, 0);
+        currentDate.set(Calendar.SECOND, 0);
+        currentDate.set(Calendar.MILLISECOND, 0);
+
+        appointmentDate.set(Calendar.HOUR_OF_DAY, 0);
+        appointmentDate.set(Calendar.MINUTE, 0);
+        appointmentDate.set(Calendar.SECOND, 0);
+        appointmentDate.set(Calendar.MILLISECOND, 0);
+
+        currentDate.add(Calendar.DATE, 2);
+
+        if (appointmentDate.compareTo(currentDate) < 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Alert")
+                    .setMessage("Cannot reject appointment when booked date is less than a day ahead.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+            return;
+        }
+
+
         updateStatusInFirestore(appointment, "rejected");
     }
 

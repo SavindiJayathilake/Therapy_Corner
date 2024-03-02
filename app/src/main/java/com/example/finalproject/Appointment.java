@@ -16,7 +16,11 @@ public class Appointment {
 
     private String patient_username;
 
+    private String therapist_username;
+
     private String time;
+
+    private String therapist_name;
 
 
     public Appointment() {}
@@ -88,5 +92,21 @@ public class Appointment {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTherapist_name() {
+        return therapist_name;
+    }
+
+    public void setTherapist_name(String therapist_name) {
+        this.therapist_name = therapist_name;
+    }
+
+    public String getTherapist_username() {
+        return therapist_username;
+    }
+
+    public void setTherapist_username(String therapist_username) {
+        this.therapist_username = therapist_username;
     }
 }

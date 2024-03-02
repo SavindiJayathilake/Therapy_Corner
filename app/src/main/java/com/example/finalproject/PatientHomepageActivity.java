@@ -24,6 +24,7 @@ public class PatientHomepageActivity extends AppCompatActivity implements View.O
         ImageView btnChatWithTherapist = findViewById(R.id.btnChatWithTherapist);
         ImageView btnSelfCare = findViewById(R.id.btnSelfCare);
         ImageView btnUserProfile = findViewById(R.id.btnUserProfile);
+        ImageView btnMyAppointments = findViewById(R.id.btnMyBooking);
 
 
         btnSearchTherapist.setOnClickListener(this);
@@ -31,6 +32,7 @@ public class PatientHomepageActivity extends AppCompatActivity implements View.O
         btnChatWithTherapist.setOnClickListener(this);
         btnSelfCare.setOnClickListener(this);
         btnUserProfile.setOnClickListener(this);
+        btnMyAppointments.setOnClickListener(this);
 
 
         username = getIntent().getStringExtra("username");
@@ -54,6 +56,9 @@ public class PatientHomepageActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.btnSelfCare:
                 startActivity(new Intent(this, SelfCareActivity.class));
+                break;
+            case R.id.btnMyBooking:
+                startActivity(new Intent(this, PatientAppointments.class));
                 break;
             case R.id.btnUserProfile:
                 Intent userProfileIntent = new Intent(this, UserPatientProfileActivity.class);
