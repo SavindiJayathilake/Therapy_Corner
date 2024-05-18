@@ -23,6 +23,7 @@ public class EJournalActivity extends AppCompatActivity {
     private List<NoteModel> noteModelList;
 
     private static final int REQUEST_CODE_ADD_NOTE = 1;
+//    public static final int REQUEST_CODE_VIEW_NOTE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,29 @@ public class EJournalActivity extends AppCompatActivity {
             }
         }
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_CODE_ADD_NOTE && resultCode == RESULT_OK) {
+//            if (data != null) {
+//                String title = data.getStringExtra("title");
+//                String details = data.getStringExtra("details");
+//                String date = data.getStringExtra("date");
+//                String time = data.getStringExtra("time");
+//
+//                NoteModel newNote = new NoteModel(title, details, date, time);
+//                noteModelList.add(0, newNote);
+//                adapter.notifyDataSetChanged();
+//            }
+//        } else if (resultCode == RESULT_OK) {
+//
+//            noteModelList = getNote();
+//            adapter.updateList(noteModelList);
+//        }
+//    }
+
+
 
 
     public List<NoteModel> getNote(){

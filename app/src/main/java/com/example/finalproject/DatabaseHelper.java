@@ -62,4 +62,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public NoteModel getNotes(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] query = new String[] {COLUMN_ID, COLUMN_TITLE, COLUMN_DETAILS, COLUMN_DATE, COLUMN_TIME, COLUMN_USERNAME};
+        Cursor cursor = db.query(DB_TABLE, query, COLUMN_ID+"=?", new String[] {String.valueOf(id)},null ,null,null,null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return new NoteModel(
+                Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4));
+    }
+
+    void deleteNote(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(DB_TABLE, COLUMN_ID+ "=?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
 }

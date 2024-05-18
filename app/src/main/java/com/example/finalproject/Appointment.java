@@ -22,6 +22,10 @@ public class Appointment {
 
     private String therapist_name;
 
+    private String approved_status;
+
+    private String therapy_service;
+
 
     public Appointment() {}
     public String getBooking_id() {
@@ -38,12 +42,28 @@ public class Appointment {
         this.time_slot = time_slot;
     }
 
+    public String getTherapy_service() {
+        return therapy_service;
+    }
+
+    public void setTherapy_service(String therapy_service) {
+        this.therapy_service = therapy_service;
+    }
+
     public String getPatient_username() {
         return patient_username;
     }
 
     public void setPatient_username(String patient_username) {
         this.patient_username = patient_username;
+    }
+
+    public String getApproved_status() {
+        return approved_status;
+    }
+
+    public void setApproved_status(String approved_status) {
+        this.approved_status = approved_status;
     }
 
     public String getTime_slot() {
