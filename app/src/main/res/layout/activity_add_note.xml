@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/tyo">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".AddNoteActivity"
-    android:background="@drawable/diary_1">
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolerbaradd"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/green_mc3"
+        android:elevation="3dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:title="Relaxing Sounds" />
 
 
     <EditText
@@ -14,9 +31,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="40dp"
         android:background="@drawable/diary_border"
         android:hint="Add Title"
+        android:layout_marginTop="29dp"
         android:inputType="textMultiLine"
         android:lines="2"
         android:maxLines="8"
@@ -24,10 +41,10 @@
         android:paddingHorizontal="10dp"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/noteDetails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/noteDetails" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolerbaradd" />
 
 
     <EditText
@@ -59,7 +76,7 @@
         android:layout_width="147dp"
         android:layout_height="37dp"
         android:layout_gravity="center"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/square_like_button"
         android:backgroundTint="@color/green_mc2"
@@ -70,3 +87,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
