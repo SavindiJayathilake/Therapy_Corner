@@ -131,33 +131,33 @@
 
                 </LinearLayout>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+<!--                <Space-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="20dp" />-->
 
-                <TextView
-                    android:id="@+id/question_communication_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="How do you prefer to communicate with your therapist?"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/question_communication_medium"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="How do you prefer to communicate with your therapist?"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/dropdown_border">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:background="@drawable/dropdown_border">-->
 
-                    <Spinner
-                        android:id="@+id/communication_medium_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:layout_marginBottom="10dp"
-                        android:entries="@array/communication_mediums_array" />
+<!--                    <Spinner-->
+<!--                        android:id="@+id/communication_medium_spinner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:entries="@array/communication_mediums_array" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <Space
                     android:layout_width="match_parent"

@@ -18,7 +18,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp"
         android:orientation="vertical">
 
 
@@ -41,10 +42,10 @@
                     android:id="@+id/selfCareTipTextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="Self-Care Tip"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:gravity="center" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

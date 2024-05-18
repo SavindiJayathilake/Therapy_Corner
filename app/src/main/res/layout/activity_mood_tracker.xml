@@ -12,17 +12,22 @@
         android:id="@+id/toolsbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="4dp"
         android:background="@color/green_mc3"
         android:elevation="4dp"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        android:title="Relaxing Sounds" />
+        android:title="Relaxing Sounds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/firstcard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
@@ -33,8 +38,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="628dp"
-            android:background="@drawable/leaves_fall"
+            android:layout_height="511dp"
+            android:background="@drawable/tfghrf"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -46,9 +51,9 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/square_like_button"
                 android:backgroundTint="#AFAC94"
-                android:text="Select Date"
                 android:drawableLeft="@drawable/baseline_calendar_month_24"
                 android:padding="8dp"
+                android:text="Select Date"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +69,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/moodCardView"
                 android:layout_width="310dp"
-                android:layout_height="227dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="4dp"
@@ -136,15 +141,15 @@
             <TextView
                 android:id="@+id/savedMoodTextView"
                 android:layout_width="293dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/prof_border"
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="10dp"
+                android:paddingTop="15dp"
                 android:text=""
                 android:textAlignment="center"
-                android:paddingTop="15dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
