@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchTherapist"
-    >
+    tools:context=".SearchTherapist">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,18 +41,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-
             android:padding="10dp">
 
             <EditText
                 android:id="@+id/search_edit_text"
                 android:layout_width="295dp"
                 android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="5dp"
+                android:layout_centerInParent="true"
                 android:background="@drawable/prof_border"
                 android:drawablePadding="8dp"
                 android:hint="Search therapists"
@@ -64,16 +58,15 @@
 
             <Button
                 android:id="@+id/search_button"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="1dp"
-                android:layout_toEndOf="@+id/search_edit_text"
+                android:layout_width="41dp"
+                android:layout_height="33dp"
+                android:layout_toEndOf="@id/search_edit_text"
+                android:layout_marginStart="8dp"
+                android:layout_centerVertical="true"
                 android:background="@drawable/baseline_search_24" />
 
-
         </RelativeLayout>
+
 
 
     </LinearLayout>

@@ -239,7 +239,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Services Offered and Preferences"
+        android:text="Services Offered And Preferences"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -349,7 +349,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Package Price Amount"
+            android:text="Price Per Session"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -371,7 +371,7 @@
             android:paddingLeft="15dp"
             android:textSize="16sp"
             android:inputType="numberDecimal"
-            android:hint="Package Price (LKR)"/>
+            android:hint="Session Price (LKR)"/>
 
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
@@ -423,7 +423,8 @@
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/round_button_small"
         android:backgroundTint="@color/red_mc1"
         android:text="Cancel"
