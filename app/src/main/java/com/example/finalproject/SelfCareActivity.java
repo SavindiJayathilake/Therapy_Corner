@@ -51,7 +51,6 @@ public class SelfCareActivity extends AppCompatActivity {
         articlesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start Articles activity
                 startActivity(new Intent(SelfCareActivity.this, DailyBoostActivity.class));
             }
         });

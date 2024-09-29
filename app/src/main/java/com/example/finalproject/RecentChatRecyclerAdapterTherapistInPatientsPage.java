@@ -5,11 +5,9 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,31 +20,33 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.List;
 
 
-public class RecentChatRecyclerAdapterThera extends FirestoreRecyclerAdapter<ChatroomModel, RecentChatRecyclerAdapterThera.ChatroomModelViewHolder> {
+public class RecentChatRecyclerAdapterTherapistInPatientsPage extends FirestoreRecyclerAdapter<ChatroomModel, RecentChatRecyclerAdapterTherapistInPatientsPage.ChatroomModelViewHolder> {
 
         Context context;
 
         private String therapistFirstName;
     private String therapistLastName;
 
-        public RecentChatRecyclerAdapterThera(@NonNull FirestoreRecyclerOptions<ChatroomModel> options, Context context) {
+        public RecentChatRecyclerAdapterTherapistInPatientsPage(@NonNull FirestoreRecyclerOptions<ChatroomModel> options, Context context) {
             super(options);
             this.context = context;
         }
 
     @Override
-    protected void onBindViewHolder(@NonNull ChatroomModelViewHolder holder, int position, @NonNull ChatroomModel model) {
+
+    protected void onBindViewHolder(@NonNull RecentChatRecyclerAdapterTherapistInPatientsPage.ChatroomModelViewHolder holder, int position, @NonNull ChatroomModel model)
+
+    {
+
         SharedPreferences preferences = holder.itemView.getContext().getSharedPreferences("user_details", MODE_PRIVATE);
         String currentUsername = preferences.getString("username", null);
 
 
-        //Assuming model.getuserNames() returns a List with patient's username as the first element
-        // and therapist's username as the second element
+
         List<String> userNames = model.getuserNames();
         String patientUsername = userNames.get(0);
         String therapistUsername = userNames.get(1);
@@ -67,6 +67,7 @@ public class RecentChatRecyclerAdapterThera extends FirestoreRecyclerAdapter<Cha
             holder.usernameText.setText(patientUsername);
         }
 
+
         boolean lastMessageSentByMe = model.getLastMessageSenderId().equals(currentUsername);
         if (lastMessageSentByMe) {
             holder.lastMessageText.setText("You: " + model.getLastMessage());
@@ -80,14 +81,14 @@ public class RecentChatRecyclerAdapterThera extends FirestoreRecyclerAdapter<Cha
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle potential errors that occurred during the read operation
+
             }
         });
 
 
         holder.itemView.setOnClickListener(v -> {
 
-                        Intent intent = new Intent(context, TheraChatActivityfromAdapterView.class);
+                        Intent intent = new Intent(context, TheraChatActivityfromAdapterViewInPatientPage.class);
                         intent.putExtra("chatroomId", model.getChatroomId());
                         intent.putExtra("patientUsername", patientUsername);
                         intent.putExtra("therapistUsername", therapistUsername);

@@ -7,4 +7,4 @@
     android:padding="16dp"
     android:clipToPadding="false"
     android:scrollbars="vertical"
-    android:background="@drawable/tyo"/>
+    android:background="@color/white"/>

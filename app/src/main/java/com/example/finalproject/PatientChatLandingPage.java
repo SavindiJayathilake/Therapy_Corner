@@ -6,30 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import java.util.ArrayList;
-import java.util.List;
-import com.example.finalproject.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
-public class TherapistChatLandingPage extends AppCompatActivity {
+public class PatientChatLandingPage extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
     private String currentUsername;
 
-    RecentChatRecyclerAdapterThera adapter;
+    RecentChatRecyclerAdapterTherapistInPatientsPage adapter;
 
 
 
@@ -51,7 +42,7 @@ public class TherapistChatLandingPage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(TherapistChatLandingPage.this, AddTherapistToChat.class);
+                Intent i = new Intent(PatientChatLandingPage.this, AddTherapistToChat.class);
                 startActivity(i);
             }
         });
@@ -68,7 +59,7 @@ public class TherapistChatLandingPage extends AppCompatActivity {
                 .orderBy("lastMessageTimestamp", Query.Direction.DESCENDING);
 
 
-        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Chat Loading", Toast.LENGTH_SHORT).show();
 
         query.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
@@ -88,7 +79,7 @@ public class TherapistChatLandingPage extends AppCompatActivity {
         FirestoreRecyclerOptions<ChatroomModel> options = new FirestoreRecyclerOptions.Builder<ChatroomModel>()
                 .setQuery(query, ChatroomModel.class).build();
 
-        adapter = new RecentChatRecyclerAdapterThera(options, this);
+        adapter = new RecentChatRecyclerAdapterTherapistInPatientsPage(options, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }

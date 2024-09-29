@@ -52,7 +52,7 @@ public class PatientHomepageActivity extends AppCompatActivity implements View.O
                 startActivity(new Intent(this, SearchTherapist.class));
                 break;
             case R.id.btnChatWithTherapist:
-                startActivity(new Intent(this, TherapistChatLandingPage.class));
+                startActivity(new Intent(this, PatientChatLandingPage.class));
                 break;
             case R.id.btnSelfCare:
                 startActivity(new Intent(this, SelfCareActivity.class));

@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                     HelperClass helperClass = dataSnapshot.getValue(HelperClass.class);
                     if (helperClass != null && helperClass.getPassword().equals(password)) {
                         String role = helperClass.getRole();
-                        saveUsername(username); // Store the username
+                        saveUsername(username);
                         redirectToHomePage(role, username);
                     } else {
                         Toast.makeText(LoginActivity.this, "Authentication failed. Please check your credentials.", Toast.LENGTH_SHORT).show();

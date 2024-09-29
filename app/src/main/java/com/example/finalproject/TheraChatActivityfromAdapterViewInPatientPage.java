@@ -1,12 +1,10 @@
 package com.example.finalproject;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,18 +15,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 
+public class TheraChatActivityfromAdapterViewInPatientPage extends AppCompatActivity {
 
-public class PatientChatActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
@@ -39,21 +32,19 @@ public class PatientChatActivity extends AppCompatActivity {
 
     String chatroomId;
     ImageButton backBtn;
+
     TextView theraName;
     private String patientUsername;
     private String therapistUsername;
 
-    private String therapistFullname;
+
     ChatroomModel chatroomModel;
-    private String patientFirstName;
-    private String patientLastName;
-    private String patientEmail;
-    private String patientsUsername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thera_chat);
+        setContentView(R.layout.activity_thera_from_adapter_view_chat);
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageBtn = findViewById(R.id.message_send_btn);
@@ -66,23 +57,24 @@ public class PatientChatActivity extends AppCompatActivity {
         if (intent != null) {
 
             chatroomId = intent.getStringExtra("chatroomId");
+
             patientUsername = intent.getStringExtra("patientUsername");
             therapistUsername = intent.getStringExtra("therapistUsername");
-            String patientFirstName = intent.getStringExtra("patientFirstName");
-            String patientLastName = intent.getStringExtra("patientLastName");
+            String therapistFirstName = intent.getStringExtra("therapistFirstName");
+            String therapistLastName = intent.getStringExtra("therapistLastName");
 
-            theraName.setText(patientFirstName + " " + patientLastName);
+            theraName.setText("Dr." + " " + therapistFirstName + " " + therapistLastName);
 
             backBtn.setOnClickListener((v)->{
                 onBackPressed();
             });
+
 
             sendMessageBtn.setOnClickListener((v -> {
                 String message = messageInput.getText().toString().trim();
                 if (message.isEmpty())
                     return;
                 sendMessageToUser(message);
-
             }));
 
             getOrCreateChatroomModel();
@@ -90,6 +82,7 @@ public class PatientChatActivity extends AppCompatActivity {
         }
 
     }
+
     void setupChatRecyclerView() {
         Query query = FirebaseUtil.getChatroomMessageReference(chatroomId)
                 .orderBy("timestamp", Query.Direction.DESCENDING);
@@ -115,18 +108,18 @@ public class PatientChatActivity extends AppCompatActivity {
     void sendMessageToUser(String message) {
 
         chatroomModel.setLastMessageTimestamp(Timestamp.now());
-        chatroomModel.setLastMessageSenderId(therapistUsername);
+        chatroomModel.setLastMessageSenderId(patientUsername);
         chatroomModel.setLastMessage(message);
         FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
 
-        ChatMessageModel chatMessageModel = new ChatMessageModel(message, therapistUsername, Timestamp.now());
+        ChatMessageModel chatMessageModel = new ChatMessageModel(message, patientUsername, Timestamp.now());
         FirebaseUtil.getChatroomMessageReference(chatroomId).add(chatMessageModel)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
                             messageInput.setText("");
-
+//                            sendNotification(message);
                         }
                     }
                 });
@@ -137,7 +130,7 @@ public class PatientChatActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 chatroomModel = task.getResult().toObject(ChatroomModel.class);
                 if (chatroomModel == null) {
-
+                    //first time chat
                     chatroomModel = new ChatroomModel(
                             chatroomId,
                             Arrays.asList(patientUsername, therapistUsername),

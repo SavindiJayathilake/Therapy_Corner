@@ -89,7 +89,7 @@ public class AddTherapistToChat extends AppCompatActivity {
     }
 
 
-    }
+}
 
 
 

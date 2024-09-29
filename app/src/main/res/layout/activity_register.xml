@@ -13,7 +13,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="623dp"
+        android:layout_height="588dp"
         android:layout_margin="30dp"
         app:cardCornerRadius="31dp"
         app:cardElevation="20dp">
@@ -39,7 +39,7 @@
                 android:id="@+id/etFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/greenish_border"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
@@ -103,7 +103,7 @@
                 android:id="@+id/radioGroupRegisterAs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:paddingLeft="9dp">
 
@@ -133,7 +133,7 @@
                 android:layout_width="237dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/round_button_small"
                 android:backgroundTint="@color/green_mc2"
                 android:text="Register"

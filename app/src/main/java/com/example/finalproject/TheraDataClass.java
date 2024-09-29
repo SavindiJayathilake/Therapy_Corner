@@ -21,6 +21,9 @@ public class TheraDataClass implements Serializable {
     private String theradataTherapyServices;
     private String theradataOfferedLanguages;
     private String theradataServicesPlatforms;
+
+    private String theradataFullName;
+
 //    private String theradataCommunicationMediums;
 
 
@@ -35,6 +38,13 @@ public class TheraDataClass implements Serializable {
     public String getTheradataFirstName() {
         return theradataFirstName;
     }
+
+    public String getTheradataFullName () {
+
+        return  theradataFullName;
+    }
+
+
 
     public String getTheradataLastName() {
         return theradataLastName;
@@ -107,7 +117,63 @@ public class TheraDataClass implements Serializable {
 
     }
 
+    public void  setTheradataFullName (String theradataFullName) {
+        this.theradataFullName = theradataFullName;
+    }
+
     public void setTherapistusername(String therapistusername) {
         this.therapistusername = therapistusername;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setTheradataMonthlyPay(double theradataMonthlyPay) {
+        this.theradataMonthlyPay = theradataMonthlyPay;
+    }
+
+    public void setTheradataFirstName(String theradataFirstName) {
+        this.theradataFirstName = theradataFirstName;
+    }
+
+    public void setTheradataLastName(String theradataLastName) {
+        this.theradataLastName = theradataLastName;
+    }
+
+    public void setTheradataEmail(String theradataEmail) {
+        this.theradataEmail = theradataEmail;
+    }
+
+    public void setTheradataPhone(String theradataPhone) {
+        this.theradataPhone = theradataPhone;
+    }
+
+    public void setTheradataImage(String theradataImage) {
+        this.theradataImage = theradataImage;
+    }
+
+    public void setTheradataGender(String theradataGender) {
+        this.theradataGender = theradataGender;
+    }
+
+    public void setTheradataOfficeAddress(String theradataOfficeAddress) {
+        this.theradataOfficeAddress = theradataOfficeAddress;
+    }
+
+    public void setTheradataArea(String theradataArea) {
+        this.theradataArea = theradataArea;
+    }
+
+    public void setTheradataTherapyServices(String theradataTherapyServices) {
+        this.theradataTherapyServices = theradataTherapyServices;
+    }
+
+    public void setTheradataOfferedLanguages(String theradataOfferedLanguages) {
+        this.theradataOfferedLanguages = theradataOfferedLanguages;
+    }
+
+    public void setTheradataServicesPlatforms(String theradataServicesPlatforms) {
+        this.theradataServicesPlatforms = theradataServicesPlatforms;
     }
 }

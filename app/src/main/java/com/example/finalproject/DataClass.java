@@ -8,7 +8,7 @@ public class DataClass {
     private String dataEmail;
     private String dataPhone;
     private String dataImage;
-    private String key;
+
 
     private String patientusername;
 

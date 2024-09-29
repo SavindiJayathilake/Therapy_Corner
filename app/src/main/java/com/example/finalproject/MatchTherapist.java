@@ -21,7 +21,7 @@ public class MatchTherapist extends AppCompatActivity {
     private DatabaseReference therapistRef;
     private Spinner locationSpinner;
     private Spinner platformSpinner;
-    private Spinner communicationMediumSpinner;
+//    private Spinner communicationMediumSpinner;
 
     private Spinner languagesSpinner;
     private Spinner therapyServicesSpinner;
@@ -46,7 +46,7 @@ public class MatchTherapist extends AppCompatActivity {
         therapistRef = FirebaseDatabase.getInstance().getReference().child("Therapist User Details");
         locationSpinner = findViewById(R.id.location_spinner);
         platformSpinner = findViewById(R.id.platform_spinner);
-        communicationMediumSpinner = findViewById(R.id.communication_medium_spinner);
+//        communicationMediumSpinner = findViewById(R.id.communication_medium_spinner);
 //        availableDaysSpinner = findViewById(R.id.available_days_spinner);
         languagesSpinner = findViewById(R.id.languages_spinner);
         therapyServicesSpinner = findViewById(R.id.therapy_services_spinner);
@@ -64,7 +64,7 @@ public class MatchTherapist extends AppCompatActivity {
     private void calculateBestMatch() {
         String preferredLocation = locationSpinner.getSelectedItem().toString();
         String preferredPlatform = platformSpinner.getSelectedItem().toString();
-        String preferredCommunicationMedium = communicationMediumSpinner.getSelectedItem().toString();
+//        String preferredCommunicationMedium = communicationMediumSpinner.getSelectedItem().toString();
 //        String preferredAvailableDays = availableDaysSpinner.getSelectedItem().toString();
         String preferredLanguages = languagesSpinner.getSelectedItem().toString();
         String preferredTherapyServices = therapyServicesSpinner.getSelectedItem().toString();
@@ -79,7 +79,7 @@ public class MatchTherapist extends AppCompatActivity {
 
                 for (DataSnapshot therapistSnapshot : snapshot.getChildren()) {
                     double matchScore = calculateMatchScore(
-                            preferredLocation, preferredPlatform, preferredCommunicationMedium,
+                            preferredLocation, preferredPlatform,
                              preferredLanguages, preferredTherapyServices,
                              preferredGender, therapistSnapshot);
 
@@ -99,23 +99,23 @@ public class MatchTherapist extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
+
             }
         });
     }
 
 
-    private double calculateMatchScore(String userLocation, String userPlatform, String userCommunicationMedium,
+    private double calculateMatchScore(String userLocation, String userPlatform,
                                        String userLanguages, String userTherapyServices, String userGender, DataSnapshot therapistSnapshot) {
         double locationScore = userLocation.equals(therapistSnapshot.child("theradataArea").getValue(String.class)) ? 1 : 0;
         double platformScore = userPlatform.equals(therapistSnapshot.child("theradataServicesPlatforms").getValue(String.class)) ? 1 : 0;
-        double communicationMediumScore = userCommunicationMedium.equals(therapistSnapshot.child("theradataCommunicationMediums").getValue(String.class)) ? 1 : 0;
+//        double communicationMediumScore = userCommunicationMedium.equals(therapistSnapshot.child("theradataCommunicationMediums").getValue(String.class)) ? 1 : 0;
 
         double languagesScore = userLanguages.equals(therapistSnapshot.child("theradataOfferedLanguages").getValue(String.class)) ? 1 : 0;
         double therapyServicesScore = userTherapyServices.equals(therapistSnapshot.child("theradataTherapyServices").getValue(String.class)) ? 1 : 0;
         double genderScore = userGender.equals(therapistSnapshot.child("theradataGender").getValue(String.class)) ? 1 : 0;
 
-        return locationScore + platformScore + communicationMediumScore + languagesScore + therapyServicesScore  + genderScore;
+        return locationScore + platformScore  + languagesScore + therapyServicesScore  + genderScore;
     }
 
     @Override

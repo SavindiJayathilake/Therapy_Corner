@@ -1,10 +1,15 @@
 package com.example.finalproject;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,12 +40,26 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.util.ArrayList;
 
+import lk.payhere.androidsdk.PHMainActivity;
+import lk.payhere.androidsdk.PHResponse;
+import lk.payhere.androidsdk.model.InitRequest;
+import lk.payhere.androidsdk.PHConfigs;
+import lk.payhere.androidsdk.PHConstants;
+import lk.payhere.androidsdk.model.Item;
+import lk.payhere.androidsdk.model.StatusResponse;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
 
 
 public class BookingTherapistActivity extends AppCompatActivity {
 
+    private static final int PAYHERE_REQUEST = 14508;
     private TextView doctorNameTextView;
-
+    private TextView payAmountTextView;
     private TextView therapyServiceTextView;
     private Button datePickerButton;
     private Spinner timeSlotsSpinner;
@@ -74,7 +93,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
 
         doctorNameTextView = findViewById(R.id.doctorNameTextView);
         therapyServiceTextView = findViewById(R.id.doctorServiceTextView);
-//        payAmountTextView = findViewById(R.id.payAmountTextView);
+        payAmountTextView = findViewById(R.id.payAmountTextView);
         datePickerButton = findViewById(R.id.datePickerButton);
         timeSlotsSpinner = findViewById(R.id.timeSlotsSpinner);
         bookButton = findViewById(R.id.bookButton);
@@ -112,6 +131,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String therapistName = intent.getStringExtra("therapistName");
         String therapyService = intent.getStringExtra("therapyService");
+        String formattedPayment = intent.getStringExtra("formattedPayment");
 
 
 
@@ -119,7 +139,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
         if (therapistName != null) {
             doctorNameTextView.setText(therapistName);
             therapyServiceTextView.setText(therapyService);
-
+            payAmountTextView.setText(formattedPayment);
         }
 
         setupDatePickerButton();
@@ -133,85 +153,8 @@ public class BookingTherapistActivity extends AppCompatActivity {
                 if (!bookButton.isEnabled()) {
                     return;
                 }
-
-                String therapistName = doctorNameTextView.getText().toString();
-                selectedDateStr = dateFormat.format(selectedDate.getTime());
-                selectedTimeSlot = (Time) timeSlotsSpinner.getSelectedItem();
-                String therapistEmail = getIntent().getStringExtra("therapistEmail");
-                String patientRole = "Patient";
-
-                DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
-
-
-
-                usersRef.orderByChild("role").equalTo(patientRole).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        boolean bookingAdded = false;
-
-                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                            String patientUsername = userSnapshot.child("username").getValue(String.class);
-
-                            if (patientUsername.equals(patientUsername)) {
-                                String therapistUsername = getIntent().getStringExtra("therapistUsername");
-                                String bookingId = UUID.randomUUID().toString();
-
-
-                                bookingsCollection
-                                        .whereEqualTo("therapist_username", therapistUsername)
-                                        .whereEqualTo("date", selectedDateStr)
-                                        .whereEqualTo("time_slot", selectedTimeSlot.toString())
-                                        .whereIn("approved_status", Arrays.asList("approved", "pending"))
-                                        .get()
-                                        .addOnSuccessListener(queryDocumentSnapshots -> {
-                                            if (queryDocumentSnapshots.isEmpty()) {
-
-                                                Map<String, Object> bookingData = new HashMap<>();
-                                                bookingData.put("booking_id", bookingId);
-                                                bookingData.put("therapist_username", therapistUsername);
-                                                bookingData.put("patient_username", patientsUsername);
-                                                bookingData.put("therapy_service", therapyService);
-                                                bookingData.put("date", selectedDateStr);
-                                                bookingData.put("time_slot", selectedTimeSlot.toString());
-                                                bookingData.put("approved_status", "pending");
-                                                bookingData.put("patient_first_name", patientFirstName);
-                                                bookingData.put("patient_last_name", patientLastName);
-                                                bookingData.put("patient_email", patientEmail);
-                                                bookingData.put("therapist_name", therapistName);
-
-                                                bookingsCollection.document(bookingId)
-                                                        .set(bookingData, SetOptions.merge())
-                                                        .addOnSuccessListener(aVoid -> {
-                                                            bookButton.setEnabled(true);
-                                                            sendEmailNotificationToTherapists(therapistEmail);
-                                                            Toast.makeText(BookingTherapistActivity.this, "Booking successful", Toast.LENGTH_SHORT).show();
-                                                        })
-                                                        .addOnFailureListener(e -> Toast.makeText(BookingTherapistActivity.this, "Booking failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-                                            } else {
-
-                                                Toast.makeText(BookingTherapistActivity.this, "The Therapist is unavailable at this date and time slot", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> {
-
-                                            Toast.makeText(BookingTherapistActivity.this, "Error checking booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        });
-
-                                bookingAdded = true;
-                                break;
-                            }
-                        }
-
-                        if (!bookingAdded) {
-                            Toast.makeText(BookingTherapistActivity.this, "Error: Patient not found", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(BookingTherapistActivity.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                checkTherapistAvailability();
+//                saveBookingDetails();
             }
         });
 
@@ -219,6 +162,183 @@ public class BookingTherapistActivity extends AppCompatActivity {
 
 
 
+    private void initiatePayment() {
+
+        InitRequest req = new InitRequest();
+        req.setMerchantId("1226090");
+
+        req.setAmount(1000);
+
+        String orderId = UUID.randomUUID().toString();
+        req.setOrderId(orderId);
+
+        req.setCurrency("LKR");
+        req.setItemsDescription("Booking Payment");
+        req.setCustom1("This is the custom message 1");
+        req.setCustom2("This is the custom message 2");
+        req.getCustomer().setFirstName(patientFirstName);
+        req.getCustomer().setLastName(patientLastName);
+        req.getCustomer().setEmail(patientEmail);
+        req.getCustomer().getAddress().setAddress("No.1, Galle Road");
+        req.getCustomer().getAddress().setCity("Colombo");
+        req.getCustomer().getAddress().setCountry("Sri Lanka");
+
+        req.getCustomer().getDeliveryAddress().setAddress("No.2, Kandy Road");
+        req.getCustomer().getDeliveryAddress().setCity("Kadawatha");
+        req.getCustomer().getDeliveryAddress().setCountry("Sri Lanka");
+        req.getItems().add(new Item(null, "Door bell wireless", 1, 1000));
+
+        Intent intent = new Intent(this, PHMainActivity.class);
+        intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
+        PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
+        startActivityForResult(intent, PAYHERE_REQUEST);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PAYHERE_REQUEST && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) {
+            PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT);
+            if (resultCode == Activity.RESULT_OK) {
+                String msg;
+                if (response != null)
+                    if (response.isSuccess())
+                        msg = "Activity result:" + response.getData().toString();
+                    else
+                        msg = "Result:" + response.toString();
+                else
+                    msg = "Result: no response";
+                Log.d(TAG, msg);
+
+
+                saveBookingDetails();
+                String therapistEmail = getIntent().getStringExtra("therapistEmail");
+                sendEmailNotificationToTherapists(therapistEmail);
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                if (response != null)
+                    Toast.makeText(BookingTherapistActivity.this, "Response: " + response.toString(), Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(BookingTherapistActivity.this, "No idea", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void checkTherapistAvailability() {
+        String therapistUsername = getIntent().getStringExtra("therapistUsername");
+        selectedDateStr = dateFormat.format(selectedDate.getTime());
+        selectedTimeSlot = (Time) timeSlotsSpinner.getSelectedItem();
+
+
+        bookingsCollection
+                .whereEqualTo("therapist_username", therapistUsername)
+                .whereEqualTo("date", selectedDateStr)
+                .whereEqualTo("time_slot", selectedTimeSlot.toString())
+                .whereIn("approved_status", Arrays.asList("approved", "pending"))
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (queryDocumentSnapshots.isEmpty()) {
+
+                        initiatePayment();
+                    } else {
+
+                        runOnUiThread(() -> {
+                            new AlertDialog.Builder(BookingTherapistActivity.this)
+                                    .setTitle("Therapist Unavailable")
+                                    .setMessage("The therapist is unavailable at this date and time slot.")
+                                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+
+                                    })
+                                    .show();
+                        });
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(BookingTherapistActivity.this, "Error checking therapist availability: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
+
+    private void saveBookingDetails() {
+        String therapistName = doctorNameTextView.getText().toString();
+        String therapyService = therapyServiceTextView.getText().toString();
+        selectedDateStr = dateFormat.format(selectedDate.getTime());
+        selectedTimeSlot = (Time) timeSlotsSpinner.getSelectedItem();
+
+        String patientRole = "Patient";
+
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
+
+        usersRef.orderByChild("role").equalTo(patientRole).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean bookingAdded = false;
+
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String patientUsername = userSnapshot.child("username").getValue(String.class);
+
+                    if (patientUsername.equals(patientUsername)) {
+                        String therapistUsername = getIntent().getStringExtra("therapistUsername");
+                        String bookingId = UUID.randomUUID().toString();
+
+
+                        bookingsCollection
+                                .whereEqualTo("therapist_username", therapistUsername)
+                                .whereEqualTo("date", selectedDateStr)
+                                .whereEqualTo("time_slot", selectedTimeSlot.toString())
+                                .whereIn("approved_status", Arrays.asList("approved", "pending"))
+                                .get()
+                                .addOnSuccessListener(queryDocumentSnapshots -> {
+                                    if (queryDocumentSnapshots.isEmpty()) {
+
+                                        Map<String, Object> bookingData = new HashMap<>();
+                                        bookingData.put("booking_id", bookingId);
+                                        bookingData.put("therapist_username", therapistUsername);
+                                        bookingData.put("patient_username", patientsUsername);
+                                        bookingData.put("therapy_service", therapyService);
+                                        bookingData.put("date", selectedDateStr);
+                                        bookingData.put("time_slot", selectedTimeSlot.toString());
+                                        bookingData.put("approved_status", "pending");
+                                        bookingData.put("patient_first_name", patientFirstName);
+                                        bookingData.put("patient_last_name", patientLastName);
+                                        bookingData.put("patient_email", patientEmail);
+                                        bookingData.put("therapist_name", therapistName);
+
+                                        bookingsCollection.document(bookingId)
+                                                .set(bookingData, SetOptions.merge())
+                                                .addOnSuccessListener(aVoid -> {
+                                                    bookButton.setEnabled(true);
+                                                    Toast.makeText(BookingTherapistActivity.this, "Booking successful", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                })
+                                                .addOnFailureListener(e -> Toast.makeText(BookingTherapistActivity.this, "Booking failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    } else {
+
+                                        Toast.makeText(BookingTherapistActivity.this, "The Therapist is unavailable at this date and time slot", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+
+                                    Toast.makeText(BookingTherapistActivity.this, "Error checking booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+
+                        bookingAdded = true;
+                        break;
+                    }
+                }
+
+                if (!bookingAdded) {
+                    Toast.makeText(BookingTherapistActivity.this, "Error: Patient not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(BookingTherapistActivity.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void setupDatePickerButton() {
         datePickerButton.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +364,7 @@ public class BookingTherapistActivity extends AppCompatActivity {
                     selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     updateSelectedDateTextView();
                     bookButton.setEnabled(true);
-                    setupTimeSlotsSpinner(); // Refresh time slots spinner when date is changed
+                    setupTimeSlotsSpinner();
                 },
                 selectedDate.get(Calendar.YEAR),
                 selectedDate.get(Calendar.MONTH),
@@ -271,10 +391,10 @@ public class BookingTherapistActivity extends AppCompatActivity {
                 new Time(18, 30)
         };
 
-        // Sort time slots
+
         Arrays.sort(timeSlots);
 
-        // Convert Time objects to String representations
+
         ArrayList<Time> timeSlotsList = new ArrayList<>();
         for (Time timeSlot : timeSlots) {
             timeSlotsList.add(timeSlot);
@@ -370,4 +490,3 @@ public class BookingTherapistActivity extends AppCompatActivity {
         }
     }
 }
-

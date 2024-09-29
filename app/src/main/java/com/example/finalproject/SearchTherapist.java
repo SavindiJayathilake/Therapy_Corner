@@ -78,7 +78,6 @@ public class SearchTherapist extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors here
             }
         });
     }

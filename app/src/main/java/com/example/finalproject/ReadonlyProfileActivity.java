@@ -39,7 +39,7 @@ public class ReadonlyProfileActivity extends AppCompatActivity {
             ImageView profileImageView = findViewById(R.id.profile_image);
             TextView therapistNameTextView = findViewById(R.id.therapist_name);
             TextView therapyServiceTextView = findViewById(R.id.therapy_service);
-//            TextView monthlypaymentTextView = findViewById(R.id.payment);
+            TextView monthlypaymentTextView = findViewById(R.id.payment);
             TextView emailTextView = findViewById(R.id.email);
             TextView phoneNumberTextView = findViewById(R.id.phone_number);
             TextView addressTextView = findViewById(R.id.address);
@@ -68,7 +68,7 @@ public class ReadonlyProfileActivity extends AppCompatActivity {
             builder.append(" / session");
 
 
-//            monthlypaymentTextView.setText(builder);
+            monthlypaymentTextView.setText(builder);
 
 
             emailTextView.setText("Email: " + therapistData.getTheradataEmail());
@@ -108,7 +108,7 @@ public class ReadonlyProfileActivity extends AppCompatActivity {
                     bookingIntent.putExtra("therapyService", therapistData.getTheradataTherapyServices());
                     bookingIntent.putExtra("therapistUsername", therapistData.getTherapistusername());
                     bookingIntent.putExtra("therapistEmail", therapistData.getTheradataEmail());
-
+                    bookingIntent.putExtra("formattedPayment", builder.toString());
 
                     startActivity(bookingIntent);
                 }

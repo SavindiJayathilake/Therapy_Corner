@@ -32,13 +32,13 @@
 <!--        <activity android:name=".LoginActivity" />-->
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".TherapistHomeActivity" />
-        <activity android:name=".PatientsChatLandingPage" />
+        <activity android:name=".TherapistsChatLandingPage" />
         <activity android:name=".TherapistProfileActivity" />
         <activity android:name=".PatientHomepageActivity" />
         <activity android:name=".SearchTherapist" />
         <activity android:name=".SelfCareActivity" />
         <activity android:name=".UserPatientProfileActivity" />
-        <activity android:name=".TherapistChatLandingPage" />
+        <activity android:name=".PatientChatLandingPage" />
         <activity android:name=".EJournalActivity"/>
         <activity android:name=".MoodTrackerActivity" />
         <activity android:name=".RelaxingSounds" />
@@ -52,10 +52,11 @@
         <activity android:name=".RejectedFragment" />
         <activity android:name=".PendingFragment" />
         <activity android:name=".AddTherapistToChat" />
-        <activity android:name=".TheraChatActivity" />
-        <activity android:name=".TheraChatActivityfromAdapterView" />
-        <activity android:name=".PatientChatActivity" />
+        <activity android:name=".TherapistsChatActivityInPatientsPage" />
+        <activity android:name=".TheraChatActivityfromAdapterViewInPatientPage" />
+        <activity android:name=".PatientChatActivityInTherapistsPage" />
         <activity android:name=".PatientAppointments" />
+        <activity android:name=".NoteDetailActivity" />
 
 
 

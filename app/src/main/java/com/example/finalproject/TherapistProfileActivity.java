@@ -171,10 +171,8 @@ public class TherapistProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Reset profile image
                 profileImage.setImageResource(R.drawable.default_profile_image);
 
-                // Reset other fields
                 etFirstName.setText("");
                 etLastName.setText("");
                 etEmail.setText("");

@@ -3,7 +3,6 @@ package com.example.finalproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +35,7 @@ public class TherapistHomeActivity extends AppCompatActivity {
         chatWithPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TherapistHomeActivity.this, PatientsChatLandingPage.class));
+                startActivity(new Intent(TherapistHomeActivity.this, TherapistsChatLandingPage.class));
             }
         });
 

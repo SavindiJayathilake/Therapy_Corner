@@ -3,7 +3,6 @@ package com.example.finalproject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,79 +27,109 @@ import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 
-public class TheraChatActivityfromAdapterView extends AppCompatActivity {
+
+public class TherapistsChatActivityInPatientsPage extends AppCompatActivity {
+
+        private RecyclerView recyclerView;
+
+        EditText messageInput;
+        ImageButton sendMessageBtn;
+
+        ChatRecyclerAdapterTheras adapter;
+
+        String chatroomId;
+        ImageButton backBtn;
+        TextView theraName;
+        private String patientUsername;
+        private String therapistUsername;
+
+        private String therapistFullname;
+        ChatroomModel chatroomModel;
+        private String patientFirstName;
+        private String patientLastName;
+        private String patientEmail;
+        private String patientsUsername;
 
 
-    private RecyclerView recyclerView;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_thera_chat);
 
-    EditText messageInput;
-    ImageButton sendMessageBtn;
+            messageInput = findViewById(R.id.chat_message_input);
+            sendMessageBtn = findViewById(R.id.message_send_btn);
+            backBtn = findViewById(R.id.back_btn);
+            theraName = findViewById(R.id.thera_name);
+            recyclerView = findViewById(R.id.chat_recycler_view);
 
-    ChatRecyclerAdapterTheras adapter;
+            SharedPreferences preferences = getSharedPreferences("user_details", MODE_PRIVATE);
+            patientUsername = preferences.getString("username", null);
 
-    String chatroomId;
-    ImageButton backBtn;
-
-    TextView theraName;
-    private String patientUsername;
-    private String therapistUsername;
-
-
-    ChatroomModel chatroomModel;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thera_from_adapter_view_chat);
-
-        messageInput = findViewById(R.id.chat_message_input);
-        sendMessageBtn = findViewById(R.id.message_send_btn);
-        backBtn = findViewById(R.id.back_btn);
-        theraName = findViewById(R.id.thera_name);
-        recyclerView = findViewById(R.id.chat_recycler_view);
+            Intent chatIntent = getIntent();
+            TheraDataClass therapistData = (TheraDataClass) chatIntent.getSerializableExtra("therapistData");
+            therapistUsername = chatIntent.getStringExtra("therapistUsername");
 
 
-        Intent intent = getIntent();
-        if (intent != null) {
 
-            chatroomId = intent.getStringExtra("chatroomId");
+            if (therapistData != null) {
+                String fullName = "Dr. " + therapistData.getTheradataFirstName() + " " + therapistData.getTheradataLastName();
+                theraName.setText(fullName);
 
-            patientUsername = intent.getStringExtra("patientUsername");
-            therapistUsername = intent.getStringExtra("therapistUsername");
-            String therapistFirstName = intent.getStringExtra("therapistFirstName");
-            String therapistLastName = intent.getStringExtra("therapistLastName");
+            }
 
-            theraName.setText("Dr." + " " + therapistFirstName + " " + therapistLastName);
+            chatroomId = FirebaseUtil.getChatroomId(patientUsername,therapistUsername);
+
+
+
+
+            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Patient User Details");
+            usersRef.orderByChild("patientusername").equalTo(patientUsername).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String firstName = snapshot.child("dataFirstName").getValue(String.class);
+                        String lastName = snapshot.child("dataLastName").getValue(String.class);
+                        String email = snapshot.child("dataEmail").getValue(String.class);
+                        String patientUsername = snapshot.child("patientusername").getValue(String.class);
+
+                        patientFirstName = firstName;
+                        patientLastName = lastName;
+                        patientEmail = email;
+                        patientsUsername = patientUsername;
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(TherapistsChatActivityInPatientsPage.this, "Failed to retrieve patient details", Toast.LENGTH_SHORT).show();
+                }
+            });
 
             backBtn.setOnClickListener((v)->{
                 onBackPressed();
             });
 
-
             sendMessageBtn.setOnClickListener((v -> {
                 String message = messageInput.getText().toString().trim();
-                if (message.isEmpty())
+                if(message.isEmpty())
                     return;
                 sendMessageToUser(message);
-//                MessageSender messageSender = new MessageSender();
-//                messageSender.sendMessageToUser(message, chatroomId, chatroomModel);
             }));
 
             getOrCreateChatroomModel();
             setupChatRecyclerView();
         }
 
-    }
-
-    void setupChatRecyclerView() {
+    void setupChatRecyclerView(){
         Query query = FirebaseUtil.getChatroomMessageReference(chatroomId)
                 .orderBy("timestamp", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<ChatMessageModel> options = new FirestoreRecyclerOptions.Builder<ChatMessageModel>()
-                .setQuery(query, ChatMessageModel.class).build();
+                .setQuery(query,ChatMessageModel.class).build();
 
-        adapter = new ChatRecyclerAdapterTheras(options, getApplicationContext());
+        adapter = new ChatRecyclerAdapterTheras(options,getApplicationContext());
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setReverseLayout(true);
         recyclerView.setLayoutManager(manager);
@@ -115,26 +144,25 @@ public class TheraChatActivityfromAdapterView extends AppCompatActivity {
         });
     }
 
-    void sendMessageToUser(String message) {
+    void sendMessageToUser(String message){
 
         chatroomModel.setLastMessageTimestamp(Timestamp.now());
         chatroomModel.setLastMessageSenderId(patientUsername);
         chatroomModel.setLastMessage(message);
         FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
 
-        ChatMessageModel chatMessageModel = new ChatMessageModel(message, patientUsername, Timestamp.now());
+        ChatMessageModel chatMessageModel = new ChatMessageModel(message,patientUsername,Timestamp.now());
         FirebaseUtil.getChatroomMessageReference(chatroomId).add(chatMessageModel)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()) {
+                        if(task.isSuccessful()){
                             messageInput.setText("");
 //                            sendNotification(message);
                         }
                     }
                 });
     }
-
     void getOrCreateChatroomModel() {
         FirebaseUtil.getChatroomReference(chatroomId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -151,5 +179,9 @@ public class TheraChatActivityfromAdapterView extends AppCompatActivity {
                 }
             }
         });
-    }
-}
+
+
+
+
+
+    }}

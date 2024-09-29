@@ -48,7 +48,7 @@ public class TherapistCardChatUserAdapter extends RecyclerView.Adapter<Therapist
             public void onClick(View view) {
                 TheraDataClass selectedTherapist = therapists.get(position);
 
-                Intent chatIntent = new Intent(view.getContext(), TheraChatActivity.class);
+                Intent chatIntent = new Intent(view.getContext(), TherapistsChatActivityInPatientsPage.class);
                 chatIntent.putExtra("therapistData", selectedTherapist);
                 chatIntent.putExtra("therapistUsername", selectedTherapist.getTherapistusername());
 
